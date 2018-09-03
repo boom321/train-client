@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.usrobot.restful.mapper.RobotPoseMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.usrobot.restful.pojo.RobotPose" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="robot_id" property="robotId" jdbcType="INTEGER" />
+    <result column="x" property="x" jdbcType="REAL" />
+    <result column="y" property="y" jdbcType="REAL" />
+    <result column="z" property="z" jdbcType="REAL" />
+    <result column="orientation_x" property="orientationX" jdbcType="REAL" />
+    <result column="orientation_y" property="orientationY" jdbcType="REAL" />
+    <result column="orientation_z" property="orientationZ" jdbcType="REAL" />
+    <result column="orientation_w" property="orientationW" jdbcType="REAL" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, robot_id, x, y, z, orientation_x, orientation_y, orientation_z, orientation_w, 
+    time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.usrobot.restful.pojo.RobotPoseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from robot_pose
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from robot_pose
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from robot_pose
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.usrobot.restful.pojo.RobotPoseExample" >
+    delete from robot_pose
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.usrobot.restful.pojo.RobotPose" >
+    insert into robot_pose (id, robot_id, x, 
+      y, z, orientation_x, orientation_y, 
+      orientation_z, orientation_w, time
+      )
+    values (#{id,jdbcType=INTEGER}, #{robotId,jdbcType=INTEGER}, #{x,jdbcType=REAL}, 
+      #{y,jdbcType=REAL}, #{z,jdbcType=REAL}, #{orientationX,jdbcType=REAL}, #{orientationY,jdbcType=REAL}, 
+      #{orientationZ,jdbcType=REAL}, #{orientationW,jdbcType=REAL}, #{time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.usrobot.restful.pojo.RobotPose" >
+    insert into robot_pose
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="robotId != null" >
+        robot_id,
+      </if>
+      <if test="x != null" >
+        x,
+      </if>
+      <if test="y != null" >
+        y,
+      </if>
+      <if test="z != null" >
+        z,
+      </if>
+      <if test="orientationX != null" >
+        orientation_x,
+      </if>
+      <if test="orientationY != null" >
+        orientation_y,
+      </if>
+      <if test="orientationZ != null" >
+        orientation_z,
+      </if>
+      <if test="orientationW != null" >
+        orientation_w,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="robotId != null" >
+        #{robotId,jdbcType=INTEGER},
+      </if>
+      <if test="x != null" >
+        #{x,jdbcType=REAL},
+      </if>
+      <if test="y != null" >
+        #{y,jdbcType=REAL},
+      </if>
+      <if test="z != null" >
+        #{z,jdbcType=REAL},
+      </if>
+      <if test="orientationX != null" >
+        #{orientationX,jdbcType=REAL},
+      </if>
+      <if test="orientationY != null" >
+        #{orientationY,jdbcType=REAL},
+      </if>
+      <if test="orientationZ != null" >
+        #{orientationZ,jdbcType=REAL},
+      </if>
+      <if test="orientationW != null" >
+        #{orientationW,jdbcType=REAL},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.usrobot.restful.pojo.RobotPoseExample" resultType="java.lang.Integer" >
+    select count(*) from robot_pose
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update robot_pose
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.robotId != null" >
+        robot_id = #{record.robotId,jdbcType=INTEGER},
+      </if>
+      <if test="record.x != null" >
+        x = #{record.x,jdbcType=REAL},
+      </if>
+      <if test="record.y != null" >
+        y = #{record.y,jdbcType=REAL},
+      </if>
+      <if test="record.z != null" >
+        z = #{record.z,jdbcType=REAL},
+      </if>
+      <if test="record.orientationX != null" >
+        orientation_x = #{record.orientationX,jdbcType=REAL},
+      </if>
+      <if test="record.orientationY != null" >
+        orientation_y = #{record.orientationY,jdbcType=REAL},
+      </if>
+      <if test="record.orientationZ != null" >
+        orientation_z = #{record.orientationZ,jdbcType=REAL},
+      </if>
+      <if test="record.orientationW != null" >
+        orientation_w = #{record.orientationW,jdbcType=REAL},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update robot_pose
+    set id = #{record.id,jdbcType=INTEGER},
+      robot_id = #{record.robotId,jdbcType=INTEGER},
+      x = #{record.x,jdbcType=REAL},
+      y = #{record.y,jdbcType=REAL},
+      z = #{record.z,jdbcType=REAL},
+      orientation_x = #{record.orientationX,jdbcType=REAL},
+      orientation_y = #{record.orientationY,jdbcType=REAL},
+      orientation_z = #{record.orientationZ,jdbcType=REAL},
+      orientation_w = #{record.orientationW,jdbcType=REAL},
+      time = #{record.time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.usrobot.restful.pojo.RobotPose" >
+    update robot_pose
+    <set >
+      <if test="robotId != null" >
+        robot_id = #{robotId,jdbcType=INTEGER},
+      </if>
+      <if test="x != null" >
+        x = #{x,jdbcType=REAL},
+      </if>
+      <if test="y != null" >
+        y = #{y,jdbcType=REAL},
+      </if>
+      <if test="z != null" >
+        z = #{z,jdbcType=REAL},
+      </if>
+      <if test="orientationX != null" >
+        orientation_x = #{orientationX,jdbcType=REAL},
+      </if>
+      <if test="orientationY != null" >
+        orientation_y = #{orientationY,jdbcType=REAL},
+      </if>
+      <if test="orientationZ != null" >
+        orientation_z = #{orientationZ,jdbcType=REAL},
+      </if>
+      <if test="orientationW != null" >
+        orientation_w = #{orientationW,jdbcType=REAL},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.usrobot.restful.pojo.RobotPose" >
+    update robot_pose
+    set robot_id = #{robotId,jdbcType=INTEGER},
+      x = #{x,jdbcType=REAL},
+      y = #{y,jdbcType=REAL},
+      z = #{z,jdbcType=REAL},
+      orientation_x = #{orientationX,jdbcType=REAL},
+      orientation_y = #{orientationY,jdbcType=REAL},
+      orientation_z = #{orientationZ,jdbcType=REAL},
+      orientation_w = #{orientationW,jdbcType=REAL},
+      time = #{time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

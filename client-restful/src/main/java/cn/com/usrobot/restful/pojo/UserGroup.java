@@ -1,0 +1,33 @@
+package cn.com.usrobot.restful.pojo;
+
+public class UserGroup {
+    private Integer id;
+
+    private String name;
+
+    private Integer functionId;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getFunctionId() {
+        return functionId;
+    }
+
+    public void setFunctionId(Integer functionId) {
+        this.functionId = functionId;
+    }
+}
